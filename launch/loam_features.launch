@@ -1,0 +1,12 @@
+<launch>
+
+<param name="use_sim_time" value="true" /> #be sure to run --clock
+
+<node pkg="tf" type="static_transform_publisher" name="velodyne_world" args="0 0 0 0 0 0 /world /velodyne 100" />
+<node pkg="tf" type="static_transform_publisher" name="loam_velodyne" args="0 0 0 1.5708 0 1.5708 /velodyne /loam 100" />
+
+<node pkg="loam_features" type="loam_features_node" name="loam_features" output="screen" clear_params="true">
+    <remap from="/pcl" to="velodyne_points"/>
+</node>
+
+</launch>
